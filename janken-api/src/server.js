@@ -28,8 +28,9 @@ app.use("/players", playersRouter.router)
 app.use("/game", gameRouter.router)
 
 
-app.listen(config.app.port, () => {
+const server = app.listen(config.app.port, () => {
     console.log(`Api for env: ${config.env} running on port: ${config.app.port}`)
 })
 
-module.exports = app
+module.exports.app = app
+module.exports.server = server

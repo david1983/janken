@@ -1,10 +1,11 @@
 const defaultConfig = require("./default")
-const devConfig = require("./dev.js")
-
+const devConfig = require("./dev")
+const testConfig = require("./test")
 // storing the env configs in an object
 const configs = {
     default: defaultConfig,
-    dev: devConfig
+    dev: devConfig,
+    test: testConfig
 }
 
 /**
