@@ -1,3 +1,4 @@
+
 module.exports = {
   env: {
     browser: true,
@@ -15,5 +16,8 @@ module.exports = {
     ecmaVersion: 2018,
   },
   rules: {
-  },
+    "comma-dangle": 0,
+    "no-console": 0,
+    "no-undef": 0
+  }
 };
