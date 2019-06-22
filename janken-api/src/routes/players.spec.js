@@ -1,6 +1,11 @@
 const players = require("./players")
-
+const db = require("../services/db")
 describe("The player route module", () => {
+
+    afterAll( async () =>{
+        await db.connection.close()
+    })
+
     it("should export the router", () => {
         expect(players).toHaveProperty("router")
     })

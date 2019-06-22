@@ -1,7 +1,7 @@
 
 const express = require("express")
 const mongoose = require("../services/db")
-const { Array, Date, ObjectId} = mongoose.Schema.Types
+const { Array, Date, ObjectId } = mongoose.Schema.Types
 
 /**
  * defining the mongoose model for storing the games
@@ -24,13 +24,13 @@ const router = express.Router()
  * @param {Response} res the express respose object
  * @param {MongooseModel} Game the mongoose model for the game collection
  */
-function createGame(req, res, Game){
+function createGame(req, res, Game) {
     // TODO: add request body validation
     const newGame = new Game(req.body.game)
     newGame
         .save()
-        .then(result => res.json({result}))
-        .catch(error => res.status(500).json({error})) // TODO: this is a bit general add more checks for other errors
+        .then(result => res.json({ result }))
+        .catch(error => res.status(500).json({ error })) // TODO: this is a bit general add more checks for other errors
 }
 
 /**
@@ -40,15 +40,23 @@ function createGame(req, res, Game){
  * @param {Response} res the express response object
  * @param {MongooseModel} Game the mongoose model for the game collection
  */
-function getGame(req, res, Game){
+function getGame(req, res, Game) {
     Game
-        .findById(req.query.id)
-        .then(result => res.json({result}))
-        .catch(error => res.status(500).json({error})) // TODO: this is a bit general add more checks for other errors
+        .findById(req.params.id)
+        .then(result => res.json({ result }))
+        .catch(error => res.status(500).json({ error })) // TODO: this is a bit general add more checks for other errors
+}
+
+function getAllGames(req, res, Game) {
+    Game
+        .find({})
+        .then(result => res.json({ result }))
+        .catch(error => res.status(500).json({ error })) // TODO: this is a bit general add more checks for other errors
 }
 
 // assigning the functions to the routes
 router.post("/", (req, res) => createGame(req, res, Game))
+router.get("/all", (req, res) => getAllGames(req, res, Game))
 router.get("/:id", (req, res) => getGame(req, res, Game))
 
 // exporting the functions in order to use them in unit tests

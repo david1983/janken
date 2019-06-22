@@ -1,17 +1,8 @@
-// integration tests for the API service
+const request = require("supertest")
 
+// const axios = require("axios")
 describe("The server module", () => {
-    beforeAll(() => {
+    it("should expose the correct port for the test environment", async () => {
         
-
-    })
-
-    it("should expose the api and the server", () => {
-        
-    })
-    
-
-    it("should expose the correct port based on the environment", () => {
-       
     })
 })
