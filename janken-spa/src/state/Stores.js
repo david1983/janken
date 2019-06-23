@@ -1,3 +1,4 @@
-import Game from './Game';
+import GameClass from './Game';
 
+const Game = new GameClass();
 export default { Game };

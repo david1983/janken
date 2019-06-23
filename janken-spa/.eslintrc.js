@@ -24,6 +24,8 @@ module.exports = {
     'react',
   ],
   rules: {
+    "react/no-array-index-key": 0,
+    "react/forbid-prop-types": 0,
     "consistent-return": 0,
     "no-console": 0,
     "no-undef": 0

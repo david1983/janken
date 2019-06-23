@@ -1,0 +1,24 @@
+.App {
+  text-align: center;
+  padding: 2em;
+}
+
+.player-selection{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-selection .label{
+  padding: 1em;
+}
+
+.player-selection .input{
+  padding: 0.5em 1em;
+}
+
+.game-page-container{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-evenly;
+}

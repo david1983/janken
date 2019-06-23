@@ -1,12 +1,13 @@
 import React from 'react';
-import { Provider } from "react-mobx"
+import { Provider } from 'mobx-react';
+
 import { MemoryRouter as Router, Route } from 'react-router';
-import '../styles/App.css';
+import '../styles/main.css';
 
 import PlayerSelection from '../pages/PlayerSelection';
-import Game from '../pages/Game';
+import Game from '../pages/GamePage';
 import LeaderBoard from '../pages/LeaderBoard';
-import Stores from "../state/Stores"
+import Stores from '../state/Stores';
 
 function App() {
   return (

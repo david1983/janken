@@ -1,22 +1,36 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { observer, inject } from 'mobx-react';
+import Button from '@material-ui/core/Button';
+import PlayerNameInput from '../components/PlayerNameInput';
+// import GameClass from '../state/Game';
 
-const PlayerSelection = () => (
+const PlayerSelection = props => (
   <div>
     <h1>Player selection</h1>
-
-    <div className="player-selection">
-      <h3>Player 1</h3>
-      <input type="text" onChange={e => console.log(e.target.value)} />
-    </div>
-
-    <div className="player-selection">
-      <h3>Player 2</h3>
-      <input type="text" onChange={e => console.log(e.target.value)} />
-    </div>
-
-    <button type="button">Set</button>
+    <form onSubmit={(e) => {
+      e.preventDefault();
+      props.history.push('/game');
+    }}
+    >
+      <PlayerNameInput key="player1" playerNumber={1} />
+      <PlayerNameInput key="player2" playerNumber={2} />
+      <Button type="submit">
+        Start Game
+      </Button>
+    </form>
 
   </div>
 );
 
-export default PlayerSelection;
+
+PlayerSelection.defaultProps = {
+  history: {},
+};
+
+PlayerSelection.propTypes = {
+  history: PropTypes.object,
+};
+
+
+export default inject('Game')(observer(PlayerSelection));
