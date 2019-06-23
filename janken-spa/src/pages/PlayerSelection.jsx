@@ -1,23 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
-import Button from '@material-ui/core/Button';
+import {
+  Card, CardContent, CardActionArea,
+} from '@material-ui/core';
 import PlayerNameInput from '../components/PlayerNameInput';
+import GameClass from '../state/Game';
 // import GameClass from '../state/Game';
 
-const PlayerSelection = props => (
-  <div>
-    <h1>Player selection</h1>
+const PlayerSelection = ({ history, Game }) => (
+  <div className="player-selection-container">
     <form onSubmit={(e) => {
       e.preventDefault();
-      props.history.push('/game');
+      Game.start();
+      history.push('/game');
     }}
     >
-      <PlayerNameInput key="player1" playerNumber={1} />
-      <PlayerNameInput key="player2" playerNumber={2} />
-      <Button type="submit">
-        Start Game
-      </Button>
+      <Card className="player-selection-form">
+        <CardContent>
+          <h1>Player selection</h1>
+          <PlayerNameInput key="player1" playerNumber={1} />
+          <PlayerNameInput key="player2" playerNumber={2} />
+        </CardContent>
+        <CardActionArea type="submit" className="player-selection-form-submit">
+          Start Game
+        </CardActionArea>
+      </Card>
     </form>
 
   </div>
@@ -26,10 +34,12 @@ const PlayerSelection = props => (
 
 PlayerSelection.defaultProps = {
   history: {},
+  Game: new GameClass(),
 };
 
 PlayerSelection.propTypes = {
   history: PropTypes.object,
+  Game: PropTypes.object,
 };
 
 

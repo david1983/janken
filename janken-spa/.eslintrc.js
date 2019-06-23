@@ -24,6 +24,9 @@ module.exports = {
     'react',
   ],
   rules: {
+    "class-methods-use-this": 0,
+    "no-param-reassign": 0,
+    "react/jsx-indent": 0,
     "react/no-array-index-key": 0,
     "react/forbid-prop-types": 0,
     "consistent-return": 0,

@@ -3,6 +3,15 @@
   padding: 2em;
 }
 
+.MuiCardActionArea-root{
+  padding: 1em!important /* not very elegant but works */
+}
+
+.player-selection-container{
+  display: flex;
+  justify-content: center;
+}
+
 .player-selection{
   display: flex;
   align-items: center;
@@ -19,6 +28,12 @@
 
 .game-page-container{
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-evenly;
+}
+
+.MuiCard-root{
+  margin-top: 1em;
+  min-width: 325px!important;
 }

@@ -27,8 +27,6 @@ const GameView = ({ Game, playerNumber }) => {
             }}
             onChange={e => Game.doMove(playerNumber, e.target.value)}
           >
-
-
             {Game.uniqueMoves.map(move => (
               <MenuItem key={`select-move-${move}`} value={move}>{move}</MenuItem>
             ))}
@@ -41,16 +39,12 @@ const GameView = ({ Game, playerNumber }) => {
 
       {player.move !== '' && (
         <div>
-          {`${player.name}'s choice is ${player.move}`}
-          {' '}
+          <div>
+            {`${player.name}'s choice is ${player.move}`}
+          </div>
           <Button onClick={() => Game.doMove(playerNumber, '')}>Change move</Button>
         </div>
       )}
-
-      <div>
-
-        <button type="button" onClick={() => Game.endTurn()} disabled={player.move === ''}>Finish turn</button>
-      </div>
 
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'mobx-react';
-
-import { MemoryRouter as Router, Route } from 'react-router';
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { Route } from 'react-router';
 import '../styles/main.css';
 
 import PlayerSelection from '../pages/PlayerSelection';
@@ -16,8 +16,9 @@ function App() {
         <Router>
           <div>
             <Route exact path="/" component={PlayerSelection} />
-            <Route path="/game" component={Game} />
-            <Route path="/leaderboard" component={LeaderBoard} />
+            <Route exact path="/game" component={Game} />
+            <Route exact path="/leaderboard" component={LeaderBoard} />
+            <Redirect to="/" />
           </div>
         </Router>
       </Provider>

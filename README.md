@@ -2,6 +2,13 @@
 
 Game of drones is the equivalent of rock paper scissors. In Japan this game is called "Janken" and it is taken to a whole new level in terms of usage and importance in daily life. If there is ever a clash of opinions between two people in Japan, more often than not this potentially embarassing situation will be decided with janken. Who gets to eat the last Rolo, you or me? What DVD should we rent, Terminator 2 or She's All That? Who should take the rap for our company's bankruptcy? etc. 
 
+Some informational videos about how to win at rock paper scissors, a mathematical explanation of the game and how the game can happen in nature, presented by Dr. Hannah Fry, Associate Professor in the Mathematics of Cities at the Centre for Advanced Spatial Analysis at UCL.
+
+https://www.youtube.com/watch?v=rudzYPHuewc
+https://www.youtube.com/watch?v=ygHwBxWyI6E
+https://www.youtube.com/watch?v=Z8lv2vy5vco
+
+
 ## Run the application
 
 Be sure to install **docker-ce** and **docker-compose**, simply run the following command in the root of the project.

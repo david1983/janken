@@ -1,51 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { observer, inject } from 'mobx-react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import {
+  Card, CardContent, CardActionArea,
+} from '@material-ui/core';
+
 import GameClass from '../state/Game';
-
-
+import RoundsResults from '../components/RoundsResults';
 import GameView from '../components/GameView';
+import GameResult from '../components/GameResult';
 
 const GamePage = ({ Game }) => (
   <div className="game-page-container">
-    <div>
-      <h1>
-        Round
-        {' '}
-        {Game.rounds.length + 1}
-      </h1>
+    {Game.getPlayer(Game.turn).name === '' && <Redirect to="/" />}
+    {Game.rounds.length < Game.maxRounds && (
+      <div className="game-view">
+        <Card>
+          <CardContent>
+            <h1>
+              {`Round ${Game.rounds.length + 1}`}
+            </h1>
+            <GameView playerNumber={Game.turn} />
+          </CardContent>
+          <CardActionArea
+            onClick={() => Game.endTurn()}
+            disabled={Game.getPlayer(Game.turn).move === '' || Game.getPlayer(Game.turn).name === ''}
+          >
+            Finish turn
+          </CardActionArea>
+        </Card>
 
-      <GameView playerNumber={Game.turn} />
-    </div>
-    <div>
-      <h1>Rounds results</h1>
-      <Paper>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Player 1</TableCell>
-              <TableCell>Player 2</TableCell>
-              <TableCell>Winner</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {Game.rounds.map((round, idx) => (
-              <TableRow key={`rounds-${idx}`}>
-                <TableCell>Player 1</TableCell>
-                <TableCell>Player 2</TableCell>
-                <TableCell>Winner</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Paper>
-    </div>
+        {Game.rounds.length > 0 && (
+          <Card>
+            <CardContent>
+              <h1>Rounds results</h1>
+              <RoundsResults />
+            </CardContent>
+          </Card>
+        )}
+      </div>
+    )}
+
+    {Game.rounds.length >= Game.maxRounds
+      && (
+        <div className="game-result">
+          <GameResult />
+        </div>
+      )}
 
   </div>
 );

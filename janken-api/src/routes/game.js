@@ -2,7 +2,7 @@
 const express = require('express');
 const mongoose = require('../services/db');
 
-const { Array, Date, ObjectId } = mongoose.Schema.Types;
+const { Array, Date } = mongoose.Schema.Types;
 
 const router = express.Router();
 
@@ -17,7 +17,7 @@ const router = express.Router();
  */
 function createGame(req, res, Game) {
   // TODO: add request body validation
-  const newGame = new Game(req.body.game);
+  const newGame = new Game(req.body);
   newGame
     .save()
     .then(result => res.json({ result }))
@@ -54,8 +54,8 @@ function getAllGames(req, res, Game) {
  */
 const Game = mongoose.model('game', {
   moves: Array,
-  player1: ObjectId,
-  player2: ObjectId,
+  rounds: Array,
+  winner: String,
   createdAt: Date,
 });
 

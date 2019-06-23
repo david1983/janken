@@ -1,4 +1,5 @@
 import { observable, action, computed } from 'mobx';
+import Api from './service/api';
 
 /**
  * Class defining the store for the Business logic of the game.
@@ -9,7 +10,7 @@ export default class Game {
     { name: '', move: '' },
   ]
 
-  maxTurns = 6
+  @observable maxRounds = 3
 
   @observable turn = 1
 
@@ -37,6 +38,11 @@ export default class Game {
 
   @observable moves = this.savedMoves.rockpaperscissorslizardspock
 
+  constructor() {
+    this.api = new Api('http://localhost:3001');
+  }
+
+
   /**
    * Set the name of the specified player number
    * @param {Number} num an integer identifying the playern number
@@ -60,19 +66,59 @@ export default class Game {
     this.players[num - 1].move = move;
   }
 
+  /**
+   * returns the name of the winner for the specified round
+   * @param {Object} roundPlayers
+   */
+  getWinner(roundPlayers) {
+    if (!roundPlayers) return;
+    // extract the players of the round
+    const players = Object.keys(roundPlayers).map(pkey => roundPlayers[pkey]);
+    // map over the players to check who generate the
+    const kills = players.map(p1 => players
+      .map(p2 => this
+        .movesMap[p1.move]
+        .kills
+        .indexOf(p2.move) >= 0));
+    const result = kills.map(i => i.reduce((a2, i2) => (a2 || i2)));
+    return result.map((i, k) => ((i) ? players[k].name : '')).join('');
+  }
+
+  getEmperor() {
+
+  }
+
+
+  @action
+  pushToRound() {
+    const players = this.players.reduce((a, i, k) => {
+      const newObj = a;
+      // deep cloning the player object, to avoid shallow copy bugs
+      // doing deep copy with the JSON library is not ideal
+      // especially for large data structures.
+      // in this case the difference in performance is negligeable
+      newObj[`player${k}`] = JSON.parse(JSON.stringify(i));
+      return newObj;
+    }, {});
+    const winner = this.getWinner(players);
+    const round = { players, winner };
+    this.rounds.push(round);
+  }
+
   @action
   endTurn() {
+    if (this.rounds.length >= this.maxRounds) {
+      return console.warn('rounds length should not be greater than maxRounds check the endTurn fn');
+    }
+
     if (this.turn === this.players.length) {
       this.turn = 1;
-      const round = this.players.reduce((a, i, k) => {
-        const newObj = a;
-        newObj[`player${k}`] = i;
-        return newObj;
-      }, {});
-      this.rounds.push(round);
+      this.pushToRound();
+      if (this.rounds.length === this.maxRounds) {
+        this.api.
+      }
       return this.resetMoves();
     }
-    if (this.turn === this.maxTurns) return;
     this.turn += 1;
   }
 
@@ -82,11 +128,44 @@ export default class Game {
   @action
   resetMoves() {
     this.players = this.players.map((player) => {
-      const newPlayer = player;
-      newPlayer.move = '';
-      return newPlayer;
+      player.move = '';
+      return player;
     });
   }
+
+  /**
+   *
+   * @param {String} key the key name of the saved set of moves
+   */
+  @action
+  selectSavedGameMoves(key) {
+    if (!this.savedMoves[key]) return console.warn(`No saved moves pattern saved with name: ${key}`);
+    this.moves = this.savedMoves[key];
+  }
+
+  /**
+   *
+   */
+  @action
+  start() {
+    const proms = this.players.map(player => this.api.savePlayer(player.name));
+    Promise.all(proms)
+      .then(result => result.map(res => res.data))
+      .catch(console.error);
+  }
+
+  @action
+  startAgain() {
+    this.resetMoves();
+    this.rounds = [];
+    this.turn = 1;
+  }
+
+  getPlayer(num) {
+    if (num > Object.keys(this.players)) return console.error('Player number must be 1 or 2');
+    return this.players[num - 1];
+  }
+
 
   /**
    * Transforms the Array of moves into an Object/Map/Dictionary
@@ -98,9 +177,16 @@ export default class Game {
     return Array.from(new Set(this.moves.map(m => m.move)));
   }
 
-
-  getPlayer(num) {
-    if (num > Object.keys(this.players)) return console.error('Player number must be 1 or 2');
-    return this.players[num - 1];
+  /**
+   * Convert the Array of moves into a Map/Object/Dictionary
+   * this should reduce the number of iterable keys
+   */
+  @computed
+  get movesMap() {
+    return this.moves.reduce((a, i) => {
+      if (!a[i.move]) a[i.move] = { kills: [i.kills] };
+      else a[i.move].kills.push(i.kills);
+      return a;
+    }, {});
   }
 }
