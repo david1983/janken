@@ -2,7 +2,7 @@
 
 exports[`the GameView component should match the snapshot of the shallow rendered component 1`] = `
 <div
-  class="game-view"
+  class="game-view-content"
 >
   <h3>
     's turn

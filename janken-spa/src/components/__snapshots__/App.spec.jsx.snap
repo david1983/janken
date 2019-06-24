@@ -309,12 +309,124 @@ exports[`the App component should match the snapshot of the shallow rendered com
           "api": Api {
             "baseUrl": "http://localhost:3001",
           },
+          "maxRounds": 100,
+          "maxWins": 3,
+          "moves": Array [
+            Object {
+              "kills": "rock",
+              "move": "paper",
+            },
+            Object {
+              "kills": "scissors",
+              "move": "rock",
+            },
+            Object {
+              "kills": "paper",
+              "move": "scissors",
+            },
+          ],
+          "players": Array [
+            Object {
+              "move": "",
+              "name": "",
+            },
+            Object {
+              "move": "",
+              "name": "",
+            },
+          ],
+          "rounds": Array [],
+          "savedMoves": Object {
+            "janken": Array [
+              Object {
+                "kills": "rock",
+                "move": "paper",
+              },
+              Object {
+                "kills": "scissors",
+                "move": "rock",
+              },
+              Object {
+                "kills": "paper",
+                "move": "scissors",
+              },
+            ],
+            "notacycle": Array [
+              Object {
+                "kills": "paper",
+                "move": "scissors",
+              },
+              Object {
+                "kills": "rock",
+                "move": "paper",
+              },
+              Object {
+                "kills": "lizard",
+                "move": "rock",
+              },
+              Object {
+                "kills": "paper",
+                "move": "lizard",
+              },
+            ],
+            "rockpaperscissorslizardspock": Array [
+              Object {
+                "kills": "paper",
+                "move": "scissors",
+              },
+              Object {
+                "kills": "rock",
+                "move": "paper",
+              },
+              Object {
+                "kills": "lizard",
+                "move": "rock",
+              },
+              Object {
+                "kills": "spock",
+                "move": "lizard",
+              },
+              Object {
+                "kills": "scissors",
+                "move": "spock",
+              },
+              Object {
+                "kills": "lizard",
+                "move": "scissors",
+              },
+              Object {
+                "kills": "paper",
+                "move": "lizard",
+              },
+              Object {
+                "kills": "spock",
+                "move": "paper",
+              },
+              Object {
+                "kills": "rock",
+                "move": "spock",
+              },
+              Object {
+                "kills": "scissors",
+                "move": "rock",
+              },
+            ],
+          },
+          "selectedMoves": "janken",
+          "turn": 1,
+        }
+      }
+      LeaderBoard={
+        LeaderBaord {
+          "api": Api {
+            "baseUrl": "http://localhost:3001",
+          },
         }
       }
     >
       <BrowserRouter>
         <div>
-          <ButtonAppBar />
+          <inject-with-LeaderBoard(ButtonAppBar) />
           <Route
             component={
               Object {
@@ -372,12 +484,27 @@ exports[`the App component should match the snapshot of the shallow rendered com
             path="/game"
           />
           <Route
-            component={[Function]}
+            component={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "displayName": "inject-with-LeaderBoard(LeaderBoardPage)",
+                "render": [Function],
+                "wrappedComponent": Object {
+                  "$$typeof": Symbol(react.memo),
+                  "compare": null,
+                  "defaultProps": Object {
+                    "LeaderBoard": Object {},
+                  },
+                  "displayName": "LeaderBoardPage",
+                  "propTypes": Object {
+                    "LeaderBoard": [Function],
+                  },
+                  "type": [Function],
+                },
+              }
+            }
             exact={true}
             path="/leaderboard"
-          />
-          <Redirect
-            to="/"
           />
         </div>
       </BrowserRouter>
