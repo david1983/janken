@@ -19,6 +19,7 @@ https://www.youtube.com/watch?v=Z8lv2vy5vco
 
 Be sure to install **docker-ce** and **docker-compose**, simply run the following command in the root of the project.
 
+
 ```
 # Build the application images
 docker-compose build 
@@ -31,6 +32,12 @@ docker-compose down
 ```
 
 This will spin up a virtual network and the necessary containers to run the application.
+
+
+# IMPORTANT BUILD INFO
+
+You need to build the spa before running the docker-compose build
+
 
 ## Development environment setup advice
 
@@ -73,7 +80,7 @@ npm run lint
 # start the spa (port 3000)
 npm start
 
+# build the application
+npm run build
 
 ```
-
-use 
