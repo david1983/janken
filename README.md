@@ -20,7 +20,14 @@ https://www.youtube.com/watch?v=Z8lv2vy5vco
 Be sure to install **docker-ce** and **docker-compose**, simply run the following command in the root of the project.
 
 ```
+# Build the application images
+docker-compose build 
+
+# spin up the services
 docker-compose up
+
+#tear down the services
+docker-compose down
 ```
 
 This will spin up a virtual network and the necessary containers to run the application.

@@ -16,7 +16,7 @@ const GamePage = ({ Game }) => (
     {Game.getPlayer(Game.turn).name === '' && <Redirect to="/" />}
 
     {!(Game.rounds.length >= Game.maxRounds || Game.getEmperor(Game.rounds) !== '') && (
-      <div className="game-view">
+      <div className="game-view-container">
         <Card>
           <CardContent>
             <h1>

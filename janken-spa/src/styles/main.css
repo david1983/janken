@@ -25,7 +25,7 @@
   padding: 0.5em 1em;
 }
 
-.game-page-container{
+.game-view-container{
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -40,6 +40,7 @@
 .form-control-select-move{
   width: 10em
 }
+
 .leaderboard-card{
   max-width: 30em;
 }

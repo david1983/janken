@@ -44,9 +44,9 @@ export default class Game {
     ],
   }
 
-  @observable selectedMoves = ''
+  @observable selectedMoves = 'janken'
 
-  @observable moves = this.savedMoves.rockpaperscissorslizardspock
+  @observable moves = this.savedMoves.janken
 
   /**
    * Constructor method

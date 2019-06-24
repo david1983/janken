@@ -15,7 +15,7 @@ import GameClass from '../state/Game';
 const GameView = ({ Game, playerNumber }) => {
   const player = Game.getPlayer(playerNumber);
   return (
-    <div className="game-view">
+    <div className="game-view-content">
 
       <h3>
         {`${[player.name]}'s turn`}
