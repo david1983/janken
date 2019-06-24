@@ -312,77 +312,75 @@ exports[`the App component should match the snapshot of the shallow rendered com
         }
       }
     >
-      <div>
-        <ButtonAppBar />
-        <BrowserRouter>
-          <div>
-            <Route
-              component={
-                Object {
-                  "$$typeof": Symbol(react.forward_ref),
-                  "displayName": "inject-with-Game(PlayerSelection)",
-                  "render": [Function],
-                  "wrappedComponent": Object {
-                    "$$typeof": Symbol(react.memo),
-                    "compare": null,
-                    "defaultProps": Object {
-                      "Game": Game {
-                        "api": Api {
-                          "baseUrl": "http://localhost:3001",
-                        },
-                      },
-                      "history": Object {},
-                    },
-                    "displayName": "PlayerSelection",
-                    "propTypes": Object {
-                      "Game": [Function],
-                      "history": [Function],
-                    },
-                    "type": [Function],
-                  },
-                }
-              }
-              exact={true}
-              path="/"
-            />
-            <Route
-              component={
-                Object {
-                  "$$typeof": Symbol(react.forward_ref),
-                  "displayName": "inject-with-Game(GamePage)",
-                  "render": [Function],
-                  "wrappedComponent": Object {
-                    "$$typeof": Symbol(react.memo),
-                    "compare": null,
-                    "defaultProps": Object {
-                      "Game": Game {
-                        "api": Api {
-                          "baseUrl": "http://localhost:3001",
-                        },
+      <BrowserRouter>
+        <div>
+          <ButtonAppBar />
+          <Route
+            component={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "displayName": "inject-with-Game(PlayerSelection)",
+                "render": [Function],
+                "wrappedComponent": Object {
+                  "$$typeof": Symbol(react.memo),
+                  "compare": null,
+                  "defaultProps": Object {
+                    "Game": Game {
+                      "api": Api {
+                        "baseUrl": "http://localhost:3001",
                       },
                     },
-                    "displayName": "GamePage",
-                    "propTypes": Object {
-                      "Game": [Function],
-                    },
-                    "type": [Function],
+                    "history": Object {},
                   },
-                }
+                  "displayName": "PlayerSelection",
+                  "propTypes": Object {
+                    "Game": [Function],
+                    "history": [Function],
+                  },
+                  "type": [Function],
+                },
               }
-              exact={true}
-              path="/game"
-            />
-            <Route
-              component={[Function]}
-              exact={true}
-              path="/leaderboard"
-            />
-            <Redirect
-              to="/"
-            />
-          </div>
-        </BrowserRouter>
-      </div>
+            }
+            exact={true}
+            path="/"
+          />
+          <Route
+            component={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "displayName": "inject-with-Game(GamePage)",
+                "render": [Function],
+                "wrappedComponent": Object {
+                  "$$typeof": Symbol(react.memo),
+                  "compare": null,
+                  "defaultProps": Object {
+                    "Game": Game {
+                      "api": Api {
+                        "baseUrl": "http://localhost:3001",
+                      },
+                    },
+                  },
+                  "displayName": "GamePage",
+                  "propTypes": Object {
+                    "Game": [Function],
+                  },
+                  "type": [Function],
+                },
+              }
+            }
+            exact={true}
+            path="/game"
+          />
+          <Route
+            component={[Function]}
+            exact={true}
+            path="/leaderboard"
+          />
+          <Redirect
+            to="/"
+          />
+        </div>
+      </BrowserRouter>
     </r>
   </ThemeProvider>
 </div>

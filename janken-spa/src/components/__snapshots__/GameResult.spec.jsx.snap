@@ -19,10 +19,10 @@ exports[`the GameResult component should match the snapshot of the shallow rende
     >
       <div>
         <h1>
-          We have a WINNER!!
+          We have a DRAW!!
         </h1>
         <h3>
-           is the new EMPEROR!
+          Press the button below to play again
         </h3>
       </div>
     </div>

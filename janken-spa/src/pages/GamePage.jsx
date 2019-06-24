@@ -14,7 +14,8 @@ import GameResult from '../components/GameResult';
 const GamePage = ({ Game }) => (
   <div className="game-page-container">
     {Game.getPlayer(Game.turn).name === '' && <Redirect to="/" />}
-    {Game.rounds.length < Game.maxRounds && (
+
+    {!(Game.rounds.length >= Game.maxRounds || Game.getEmperor(Game.rounds) !== '') && (
       <div className="game-view">
         <Card>
           <CardContent>
@@ -46,7 +47,7 @@ const GamePage = ({ Game }) => (
       </div>
     )}
 
-    {Game.rounds.length >= Game.maxRounds
+    {(Game.rounds.length >= Game.maxRounds || Game.getEmperor(Game.rounds) !== '')
       && (
         <div className="game-result">
           <GameResult />

@@ -8,43 +8,48 @@ exports[`the GameView component should match the snapshot of the shallow rendere
     's turn
   </h3>
   <div>
-    <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-animated"
-      for="move-simple"
-    >
-      Choose a move
-    </label>
     <div
-      class="MuiInputBase-root MuiInput-root MuiInput-underline"
+      class="MuiFormControl-root form-control-select-move"
     >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
+        data-shrink="true"
+        for="move-simple"
+      >
+        Choose a move
+      </label>
       <div
-        class="MuiSelect-root"
+        class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
       >
         <div
-          aria-haspopup="true"
-          aria-pressed="false"
-          class="MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
-          id="select-move"
-          role="button"
-          tabindex="0"
-        />
-        <input
-          id="move-simple"
-          name="move"
-          type="hidden"
-          value="Chose a move"
-        />
-        <svg
-          aria-hidden="true"
-          class="MuiSvgIcon-root MuiSelect-icon"
-          focusable="false"
-          role="presentation"
-          viewBox="0 0 24 24"
+          class="MuiSelect-root"
         >
-          <path
-            d="M7 10l5 5 5-5z"
+          <div
+            aria-haspopup="true"
+            aria-pressed="false"
+            class="MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+            id="select-move"
+            role="button"
+            tabindex="0"
           />
-        </svg>
+          <input
+            id="move-simple"
+            name="move"
+            type="hidden"
+            value="Chose a move"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSelect-icon"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+        </div>
       </div>
     </div>
   </div>

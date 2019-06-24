@@ -10,7 +10,9 @@ export default class Game {
     { name: '', move: '' },
   ]
 
-  @observable maxRounds = 1
+  @observable maxWins = 3
+
+  @observable maxRounds = 100;
 
   @observable turn = 1
 
@@ -80,15 +82,17 @@ export default class Game {
     if (!roundPlayers) return;
     // extract the players of the round
     const players = Object.keys(roundPlayers).map(pkey => roundPlayers[pkey]);
-    // map over the players to check who generate the kill
+    // map over the players to check who generates the kill
     const kills = players.map(p1 => players
       .map(p2 => this
         .movesMap[p1.move]
         .kills
         .indexOf(p2.move) >= 0));
-
-    const result = kills.map(i => i.reduce((a2, i2) => (a2 || i2)));
-    return result.map((i, k) => ((i) ? players[k].name : '')).join('');
+    // transform the array of kills in a more readable format
+    // this assume that there is a rulle in the game were
+    // move1 and move2 cannot kill each other
+    const result = kills.map(i => i.reduce((a2, i2) => (a2 || i2))).map((i, k) => ((i) ? players[k].name : ''));
+    console.log(result);
   }
 
   /**
@@ -107,9 +111,17 @@ export default class Game {
 
       return a;
     }, []);
+
     const sortedAggreg = aggregation.sort((a, b) => a[1] - b[1]);
+
+    // if sortedAggregation is empty means that all the played rounds were draws
     if (sortedAggreg.length === 0) return '';
-    return sortedAggreg[sortedAggreg.length - 1][0];
+    // the player with max number of wins is the last element of the sorted Array
+    const [emperorName, emperorWins] = sortedAggreg[sortedAggreg.length - 1];
+    // if player with max number of wins reach the maxWins property returns its name
+    if (emperorWins === this.maxWins) { return emperorName; }
+    // otherwise returns an empty string
+    return '';
   }
 
 
