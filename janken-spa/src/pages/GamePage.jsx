@@ -32,10 +32,7 @@ const GamePage = ({ Game }) => (
             >
               Finish turn
             </Button>
-
           </CardActions>
-
-
         </Card>
 
         {Game.rounds.length > 0 && (

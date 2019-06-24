@@ -24,22 +24,24 @@ const theme = createMuiTheme({
   },
 });
 
+/**
+ * Main component that is mounted on the root DOM element
+ * Here are defined the routes of the app, and the providers
+ */
 function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
         <Provider {...Stores}>
-          <div>
-            <Header />
-            <Router>
-              <div>
-                <Route exact path="/" component={PlayerSelection} />
-                <Route exact path="/game" component={Game} />
-                <Route exact path="/leaderboard" component={LeaderBoard} />
-                <Redirect to="/" />
-              </div>
-            </Router>
-          </div>
+          <Router>
+            <div>
+              <Header />
+              <Route exact path="/" component={PlayerSelection} />
+              <Route exact path="/game" component={Game} />
+              <Route exact path="/leaderboard" component={LeaderBoard} />
+              <Redirect to="/" />
+            </div>
+          </Router>
         </Provider>
       </ThemeProvider>
     </div>

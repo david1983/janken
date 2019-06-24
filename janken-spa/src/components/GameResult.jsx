@@ -6,36 +6,52 @@ import {
 } from '@material-ui/core';
 import GameClass from '../state/Game';
 
-const GameResult = ({ Game }) => (
-  <div className="game-result">
-    <Card>
-      <CardHeader>Game result</CardHeader>
-      <CardContent>
-        <div>
+/**
+ * The GameResult component renders a card containing
+ * the winner of the rounds
+ */
+const GameResult = ({ Game }) => {
+  const winner = Game.getEmperor(Game.rounds);
+  return (
+    <div className="game-result">
+      <Card>
+        <CardHeader>Game result</CardHeader>
+        <CardContent>
+          {winner !== '' && (
+            <div>
+              <h1>We have a WINNER!!</h1>
+              <h3>
+                {Game.getEmperor(Game.rounds)}
+                {' '}
+                is the new EMPEROR!
+              </h3>
+            </div>
+          )}
 
-          <h1>We have a WINNER!!</h1>
-          <h3>
-            {Game.getEmperor(Game.rounds)}
-            {' '}
-            is the new EMPEROR!
-          </h3>
+          {winner === '' && (
+            <div>
+              <h1>We have a DRAW!!</h1>
+              <h3>
+                Press the button below to play again
+              </h3>
+            </div>
+          )}
+        </CardContent>
+        <CardActions className="action-area">
+          <Button
+            type="button"
+            color="primary"
+            variant="contained"
+            onClick={() => Game.startAgain()}
+          >
+            Play again
+          </Button>
+        </CardActions>
+      </Card>
+    </div>
+  );
+};
 
-        </div>
-      </CardContent>
-      <CardActions className="action-area">
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => Game.startAgain()}
-        >
-          Play again
-        </Button>
-      </CardActions>
-    </Card>
-
-
-  </div>
-);
 
 GameResult.defaultProps = {
   Game: new GameClass(),

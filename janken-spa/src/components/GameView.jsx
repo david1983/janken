@@ -2,11 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 import {
-  MenuItem, Button, InputLabel, Select,
+  FormControl, MenuItem, Button, InputLabel, Select,
 } from '@material-ui/core';
 
 import GameClass from '../state/Game';
 
+/**
+ * Component that renders the main game view
+ * where the players can choose their moves
+ * @param {props} props The component props
+ */
 const GameView = ({ Game, playerNumber }) => {
   const player = Game.getPlayer(playerNumber);
   return (
@@ -19,19 +24,23 @@ const GameView = ({ Game, playerNumber }) => {
       {player.move === '' && (
         <div>
 
-          <InputLabel htmlFor="move-simple">Choose a move</InputLabel>
-          <Select
-            inputProps={{
-              name: 'move',
-              id: 'move-simple',
-            }}
-            onChange={e => Game.doMove(playerNumber, e.target.value)}
-          >
-            {Game.uniqueMoves.map(move => (
-              <MenuItem key={`select-move-${move}`} value={move}>{move}</MenuItem>
-            ))}
+          <FormControl className="form-control-select-move">
 
-          </Select>
+            <InputLabel htmlFor="move-simple">Choose a move</InputLabel>
+            <Select
+              inputProps={{
+                name: 'move',
+                id: 'move-simple',
+              }}
+              value="Chose a move"
+              onChange={e => Game.doMove(playerNumber, e.target.value)}
+            >
+              {Game.uniqueMoves.map(move => (
+                <MenuItem key={`select-move-${move}`} value={move}>{move}</MenuItem>
+              ))}
+
+            </Select>
+          </FormControl>
 
         </div>
       )

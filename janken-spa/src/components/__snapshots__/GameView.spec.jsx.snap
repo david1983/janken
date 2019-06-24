@@ -27,15 +27,12 @@ exports[`the GameView component should match the snapshot of the shallow rendere
           id="select-move"
           role="button"
           tabindex="0"
-        >
-          <span>
-            ​
-          </span>
-        </div>
+        />
         <input
           id="move-simple"
           name="move"
           type="hidden"
+          value="Chose a move"
         />
         <svg
           aria-hidden="true"

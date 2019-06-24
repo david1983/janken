@@ -36,3 +36,7 @@
   margin-top: 1em;
   min-width: 325px!important;
 }
+
+.form-control-select-move{
+  width: 10em
+}

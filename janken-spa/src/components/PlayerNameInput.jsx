@@ -4,6 +4,10 @@ import { observer, inject } from 'mobx-react';
 import { Input } from '@material-ui/core';
 import GameClass from '../state/Game';
 
+/**
+ * Component that renders the text input for the player name
+ * @param {object} param0 the component props
+ */
 const PlayerNameInput = ({ Game, playerNumber }) => (
   <div className="player-selection">
     <h3 className="label">

@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+/**
+ * Component that renders the application bar and the menu drawer
+ */
 export default function ButtonAppBar() {
   const classes = useStyles();
   const [state, setState] = React.useState({
