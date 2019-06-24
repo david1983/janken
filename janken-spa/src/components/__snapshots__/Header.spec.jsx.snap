@@ -21,7 +21,7 @@ exports[`the Header component should match the snapshot of the shallow rendered 
         className="makeStyles-title-3"
         variant="h6"
       >
-        News
+        Janken
       </WithStyles(ForwardRef(Typography))>
     </WithStyles(ForwardRef(Toolbar))>
   </WithStyles(ForwardRef(AppBar))>

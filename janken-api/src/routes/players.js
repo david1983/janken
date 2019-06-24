@@ -1,27 +1,25 @@
 const express = require('express');
+const moment = require('moment');
+
 const mongoose = require('../services/db');
 
 const router = express.Router();
 const { Date, String } = mongoose.Schema.Types;
 
-
-// Basic CRUD for the players collection
-
 function createPlayer(req, res, Player) {
   if (!req.body.name) return res.status(400).json({ error: 'name must be provided' });
   const p = req.body;
-  p.createdAt = new Date();
+  p.createdAt = moment();
   const newPlayer = new Player(p);
 
   return newPlayer
     .save()
     .then(result => res.json({ result }))
     .catch((error) => {
-      console.log(error.code);
+      // in case of already existing player return 200 and a message
       if (error.code === 11000) return res.json({ message: 'the player already exists' });
       return res.status(500).json({ error });
     });
-  // TODO: this is a bit general, add more error handling
 }
 
 function getPlayer(req, res, Player) {
@@ -29,6 +27,7 @@ function getPlayer(req, res, Player) {
   return Player.findById(req.params.id)
     .then(result => res.json({ result }))
     .catch(error => res.status(500).json({ error }));
+  // TODO: returning 500 is a bit general, more checks are needed
 }
 
 /**

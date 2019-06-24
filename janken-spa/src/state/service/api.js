@@ -20,6 +20,10 @@ class Api {
   saveGame(game) {
     return axios.post(`${this.baseUrl}/game`, game);
   }
+
+  getAllGames() {
+    return axios.get(`${this.baseUrl}/game/all`);
+  }
 }
 
 export default Api;

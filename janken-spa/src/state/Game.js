@@ -46,6 +46,10 @@ export default class Game {
 
   @observable moves = this.savedMoves.rockpaperscissorslizardspock
 
+  /**
+   * Constructor method
+   * instantiate an Api service
+   */
   constructor() {
     this.api = new Api('http://localhost:3001');
   }
@@ -92,7 +96,14 @@ export default class Game {
     // this assume that there is a rulle in the game were
     // move1 and move2 cannot kill each other
     const result = kills.map(i => i.reduce((a2, i2) => (a2 || i2))).map((i, k) => ((i) ? players[k].name : ''));
-    console.log(result);
+
+
+    if (result.filter(i => i !== '').length > 1) {
+      console.error(`looks like that ${p1.move} and ${p2.move} kills each other, are you sure that moves have been configured correctly?`);
+      return '';
+    }
+
+    return result.join('');
   }
 
   /**
@@ -101,17 +112,19 @@ export default class Game {
    */
   getEmperor(rounds) {
     if (!rounds) return console.error('rounds must be provided');
+    // get an array with the round winners
     const winners = rounds.map(round => round.winner);
+    // compute an aggregation that returns a  multidim array [[p1name, p1wins],[p2name, p2wins]]
     const aggregation = winners.reduce((a, i) => {
-      const elem = a.filter(iter => iter[0] === i);
-      if (elem.length > 0) {
-        const idx = a.indexOf(elem[0]);
+      const elems = a.filter(iter => iter[0] === i);
+      if (elems.length > 0) {
+        const idx = a.indexOf(elems[0]);
         a[idx][1] += 1;
       } else { a.push([i, 1]); }
-
       return a;
     }, []);
 
+    // ASC order the aggregation
     const sortedAggreg = aggregation.sort((a, b) => a[1] - b[1]);
 
     // if sortedAggregation is empty means that all the played rounds were draws
@@ -150,13 +163,12 @@ export default class Game {
     if (this.turn === this.players.length) {
       this.turn = 1;
       this.pushToRound();
-      if (this.rounds.length === this.maxRounds) {
+      if (this.rounds.length === this.maxRounds || this.getEmperor(this.rounds) !== '') {
         const game = {
           moves: this.moves,
           winner: this.getEmperor(this.rounds),
           rounds: this.rounds,
         };
-        console.log(game);
         this.api.saveGame(game)
           .catch(console.error);
       }
@@ -187,7 +199,7 @@ export default class Game {
   }
 
   /**
-   *
+   * start the game and send the players infos to the backend
    */
   @action
   start() {
@@ -197,6 +209,9 @@ export default class Game {
       .catch(console.error);
   }
 
+  /**
+   * reset the game properties
+   */
   @action
   startAgain() {
     this.resetMoves();
@@ -204,6 +219,10 @@ export default class Game {
     this.turn = 1;
   }
 
+  /**
+   * Returns the player objects associated to the player number
+   * @param {Number} num the p[layer number
+   */
   getPlayer(num) {
     if (num > Object.keys(this.players)) return console.error('Player number must be 1 or 2');
     return this.players[num - 1];

@@ -41,6 +41,12 @@ function getGame(req, res, Game) {
   // TODO: this is a bit general add more checks for other errors
 }
 
+/**
+ * Get all the games
+ * @param {Request} req the express request object
+ * @param {Response} res the express response object
+ * @param {MongooseModel} Game the mongoose model for the game collection
+ */
 function getAllGames(req, res, Game) {
   Game
     .find({})

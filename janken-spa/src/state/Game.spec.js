@@ -114,20 +114,20 @@ describe('the game store', () => {
     expect(Game.turn).toBe(1);
   });
 
-  it('should return the winner of the game given a set of rounds', () => {
+  it('should return the emperor of the game given a set of rounds', () => {
     Game.selectSavedGameMoves('rockpaperscissorslizardspock');
     Game.setPlayerName(1, 'test1');
     Game.setPlayerName(2, 'test2');
     Game.doMove(1, 'paper');
     Game.doMove(2, 'spock');
     Game.pushToRound();
-    Game.doMove(1, 'paper');
-    Game.doMove(2, 'scissors');
-    Game.pushToRound();
-    Game.doMove(1, 'spock');
+    Game.doMove(1, 'scissors');
     Game.doMove(2, 'paper');
     Game.pushToRound();
+    Game.doMove(1, 'rock');
+    Game.doMove(2, 'scissors');
+    Game.pushToRound();
     const emperor = Game.getEmperor(Game.rounds);
-    expect(emperor).toBe('test2');
+    expect(emperor).toBe('test1');
   });
 });
