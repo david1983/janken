@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 import {
-  Card, CardContent, CardActionArea,
+  Card, CardContent, CardActions, Button,
 } from '@material-ui/core';
 import PlayerNameInput from '../components/PlayerNameInput';
 import GameClass from '../state/Game';
@@ -22,9 +22,17 @@ const PlayerSelection = ({ history, Game }) => (
           <PlayerNameInput key="player1" playerNumber={1} />
           <PlayerNameInput key="player2" playerNumber={2} />
         </CardContent>
-        <CardActionArea type="submit" className="player-selection-form-submit">
-          Start Game
-        </CardActionArea>
+        <CardActions className="action-area">
+          <Button
+            color="primary"
+            variant="contained"
+            type="submit"
+            className="player-selection-form-submit"
+          >
+            Start Game
+          </Button>
+
+        </CardActions>
       </Card>
     </form>
 

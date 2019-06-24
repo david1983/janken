@@ -42,6 +42,7 @@ const GameView = ({ Game, playerNumber }) => {
           <div>
             {`${player.name}'s choice is ${player.move}`}
           </div>
+          <hr />
           <Button onClick={() => Game.doMove(playerNumber, '')}>Change move</Button>
         </div>
       )}

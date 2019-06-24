@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+/**
+ * The Api class defines the object
+ * used to interface with the REST api
+ */
 class Api {
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
@@ -13,8 +17,8 @@ class Api {
     return axios.get(`${this.baseUrl}/player/${id}`);
   }
 
-  saveGame(round, moves, winner) {
-    return axios.post(`${this.baseUrl}/game`, { round, moves, winner });
+  saveGame(game) {
+    return axios.post(`${this.baseUrl}/game`, game);
   }
 }
 

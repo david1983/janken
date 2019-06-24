@@ -71,6 +71,30 @@ describe('the game store', () => {
     expect(result).toBe('test2');
   });
 
+  it('should return an empty string when draw', () => {
+    Game.selectSavedGameMoves('janken');
+    Game.startAgain();
+    Game.setPlayerName(1, 'test1');
+    Game.setPlayerName(2, 'test2');
+    Game.doMove(1, 'rock');
+    Game.doMove(2, 'rock');
+    Game.pushToRound();
+    const result = Game.getWinner(Game.rounds[0].players);
+    expect(result).toBe('');
+  });
+
+  it('should return an empty string when draw and the moves are not cyclic', () => {
+    Game.selectSavedGameMoves('notacycle');
+    Game.startAgain();
+    Game.setPlayerName(1, 'test1');
+    Game.setPlayerName(2, 'test2');
+    Game.doMove(1, 'scissors');
+    Game.doMove(2, 'lizard');
+    Game.pushToRound();
+    const result = Game.getWinner(Game.rounds[0].players);
+    expect(result).toBe('');
+  });
+
   it('should returns a list of unique moves', () => {
     Game.selectSavedGameMoves('rockpaperscissorslizardspock');
     const moves = Game.uniqueMoves;
@@ -88,5 +112,22 @@ describe('the game store', () => {
     expect(Game.players[0].move).toBe('');
     expect(Game.rounds.length).toBe(0);
     expect(Game.turn).toBe(1);
+  });
+
+  it('should return the winner of the game given a set of rounds', () => {
+    Game.selectSavedGameMoves('rockpaperscissorslizardspock');
+    Game.setPlayerName(1, 'test1');
+    Game.setPlayerName(2, 'test2');
+    Game.doMove(1, 'paper');
+    Game.doMove(2, 'spock');
+    Game.pushToRound();
+    Game.doMove(1, 'paper');
+    Game.doMove(2, 'scissors');
+    Game.pushToRound();
+    Game.doMove(1, 'spock');
+    Game.doMove(2, 'paper');
+    Game.pushToRound();
+    const emperor = Game.getEmperor(Game.rounds);
+    expect(emperor).toBe('test2');
   });
 });

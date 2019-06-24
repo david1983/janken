@@ -17,6 +17,7 @@ const router = express.Router();
  */
 function createGame(req, res, Game) {
   // TODO: add request body validation
+  console.log(req.body);
   const newGame = new Game(req.body);
   newGame
     .save()

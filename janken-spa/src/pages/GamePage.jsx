@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { observer, inject } from 'mobx-react';
 import {
-  Card, CardContent, CardActionArea,
+  Card, CardContent, CardActions, Button,
 } from '@material-ui/core';
 
 import GameClass from '../state/Game';
@@ -23,12 +23,19 @@ const GamePage = ({ Game }) => (
             </h1>
             <GameView playerNumber={Game.turn} />
           </CardContent>
-          <CardActionArea
-            onClick={() => Game.endTurn()}
-            disabled={Game.getPlayer(Game.turn).move === '' || Game.getPlayer(Game.turn).name === ''}
-          >
-            Finish turn
-          </CardActionArea>
+          <CardActions className="action-area">
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={() => Game.endTurn()}
+              disabled={Game.getPlayer(Game.turn).move === '' || Game.getPlayer(Game.turn).name === ''}
+            >
+              Finish turn
+            </Button>
+
+          </CardActions>
+
+
         </Card>
 
         {Game.rounds.length > 0 && (

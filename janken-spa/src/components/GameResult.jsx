@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 import {
-  Card, CardHeader, CardContent, CardActionArea,
+  Card, CardHeader, CardContent, CardActions, Button,
 } from '@material-ui/core';
 import GameClass from '../state/Game';
 
@@ -14,13 +14,23 @@ const GameResult = ({ Game }) => (
         <div>
 
           <h1>We have a WINNER!!</h1>
-          <h3>Player is the new EMPEROR!</h3>
+          <h3>
+            {Game.getEmperor(Game.rounds)}
+            {' '}
+            is the new EMPEROR!
+          </h3>
 
         </div>
       </CardContent>
-      <CardActionArea onClick={() => Game.startAgain()}>
-        Play again
-      </CardActionArea>
+      <CardActions className="action-area">
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => Game.startAgain()}
+        >
+          Play again
+        </Button>
+      </CardActions>
     </Card>
 
 

@@ -10,7 +10,7 @@ export default class Game {
     { name: '', move: '' },
   ]
 
-  @observable maxRounds = 3
+  @observable maxRounds = 1
 
   @observable turn = 1
 
@@ -33,6 +33,12 @@ export default class Game {
       { move: 'paper', kills: 'spock' },
       { move: 'spock', kills: 'rock' },
       { move: 'rock', kills: 'scissors' },
+    ],
+    notacycle: [
+      { move: 'scissors', kills: 'paper' },
+      { move: 'paper', kills: 'rock' },
+      { move: 'rock', kills: 'lizard' },
+      { move: 'lizard', kills: 'paper' },
     ],
   }
 
@@ -74,18 +80,36 @@ export default class Game {
     if (!roundPlayers) return;
     // extract the players of the round
     const players = Object.keys(roundPlayers).map(pkey => roundPlayers[pkey]);
-    // map over the players to check who generate the
+    // map over the players to check who generate the kill
     const kills = players.map(p1 => players
       .map(p2 => this
         .movesMap[p1.move]
         .kills
         .indexOf(p2.move) >= 0));
+
     const result = kills.map(i => i.reduce((a2, i2) => (a2 || i2)));
     return result.map((i, k) => ((i) ? players[k].name : '')).join('');
   }
 
-  getEmperor() {
+  /**
+   * Given a set of rounds returns the name of the player
+   * who won most rounds
+   */
+  getEmperor(rounds) {
+    if (!rounds) return console.error('rounds must be provided');
+    const winners = rounds.map(round => round.winner);
+    const aggregation = winners.reduce((a, i) => {
+      const elem = a.filter(iter => iter[0] === i);
+      if (elem.length > 0) {
+        const idx = a.indexOf(elem[0]);
+        a[idx][1] += 1;
+      } else { a.push([i, 1]); }
 
+      return a;
+    }, []);
+    const sortedAggreg = aggregation.sort((a, b) => a[1] - b[1]);
+
+    return sortedAggreg[sortedAggreg.length - 1][0];
   }
 
 
@@ -115,7 +139,14 @@ export default class Game {
       this.turn = 1;
       this.pushToRound();
       if (this.rounds.length === this.maxRounds) {
-        this.api.
+        const game = {
+          moves: this.moves,
+          winner: this.getEmperor(this.rounds),
+          rounds: this.rounds,
+        };
+        console.log(game);
+        this.api.saveGame(game)
+          .catch(console.error);
       }
       return this.resetMoves();
     }
