@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the PlayerNameInput component should match the snapshot of the shallow rendered component 1`] = `
+<div
+  class="player-selection"
+>
+  <h3
+    class="label"
+  >
+    Player 1
+  </h3>
+   
+  <div
+    class="MuiInputBase-root MuiInput-root MuiInput-underline input"
+    required=""
+  >
+    <input
+      class="MuiInputBase-input MuiInput-input"
+      placeholder="type name for player 1"
+      required=""
+      type="text"
+    />
+  </div>
+</div>
+`;

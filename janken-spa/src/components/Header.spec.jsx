@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import GamePage from './GamePage';
+import Header from './Header';
 
-describe('the GamePage component', () => {
+describe('the Header component', () => {
   it('should match the snapshot of the shallow rendered component', () => {
-    const component = <GamePage />;
+    const component = <Header />;
     const rendered = shallow(component);
     expect(rendered).toMatchSnapshot();
   });

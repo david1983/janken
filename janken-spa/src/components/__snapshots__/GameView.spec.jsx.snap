@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the GameView component should match the snapshot of the shallow rendered component 1`] = `
+<div
+  class="game-view"
+>
+  <h3>
+    's turn
+  </h3>
+  <div>
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-animated"
+      for="move-simple"
+    >
+      Choose a move
+    </label>
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline"
+    >
+      <div
+        class="MuiSelect-root"
+      >
+        <div
+          aria-haspopup="true"
+          aria-pressed="false"
+          class="MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
+          id="select-move"
+          role="button"
+          tabindex="0"
+        >
+          <span>
+            ​
+          </span>
+        </div>
+        <input
+          id="move-simple"
+          name="move"
+          type="hidden"
+        />
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSelect-icon"
+          focusable="false"
+          role="presentation"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;

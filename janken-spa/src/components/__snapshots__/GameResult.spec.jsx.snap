@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the GameResult component should match the snapshot of the shallow rendered component 1`] = `
+<div
+  class="game-result"
+>
+  <div
+    class="MuiPaper-root MuiPaper-elevation1 MuiCard-root MuiPaper-rounded"
+  >
+    <div
+      class="MuiCardHeader-root"
+    >
+      <div
+        class="MuiCardHeader-content"
+      />
+    </div>
+    <div
+      class="MuiCardContent-root"
+    >
+      <div>
+        <h1>
+          We have a WINNER!!
+        </h1>
+        <h3>
+           is the new EMPEROR!
+        </h3>
+      </div>
+    </div>
+    <div
+      class="MuiCardActions-root action-area MuiCardActions-spacing"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          Play again
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

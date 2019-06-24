@@ -108,7 +108,7 @@ export default class Game {
       return a;
     }, []);
     const sortedAggreg = aggregation.sort((a, b) => a[1] - b[1]);
-
+    if (sortedAggreg.length === 0) return '';
     return sortedAggreg[sortedAggreg.length - 1][0];
   }
 
