@@ -44,6 +44,8 @@ export default class Game {
     ],
   }
 
+  @observable selectedMoves = ''
+
   @observable moves = this.savedMoves.rockpaperscissorslizardspock
 
   /**
@@ -96,7 +98,6 @@ export default class Game {
     // this assume that there is a rulle in the game were
     // move1 and move2 cannot kill each other
     const result = kills.map(i => i.reduce((a2, i2) => (a2 || i2))).map((i, k) => ((i) ? players[k].name : ''));
-
 
     if (result.filter(i => i !== '').length > 1) {
       console.error(`looks like that ${p1.move} and ${p2.move} kills each other, are you sure that moves have been configured correctly?`);
@@ -189,12 +190,14 @@ export default class Game {
   }
 
   /**
-   *
+   * Select the set of moves to use during the game
    * @param {String} key the key name of the saved set of moves
    */
   @action
   selectSavedGameMoves(key) {
     if (!this.savedMoves[key]) return console.warn(`No saved moves pattern saved with name: ${key}`);
+    if (key === 'rockpaperscissorslizardspock') console.log('Hail Sam Kass!');
+    this.selectedMoves = key;
     this.moves = this.savedMoves[key];
   }
 

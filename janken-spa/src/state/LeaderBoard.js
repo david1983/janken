@@ -3,21 +3,23 @@ import Api from './service/api';
 
 
 class LeaderBaord {
-    @observable leaderboard = []
+  @observable leaderboard = []
 
-    constructor() {
-      this.api = new Api('http://localhost:3001');
-    }
+  constructor() {
+    this.api = new Api('http://localhost:3001');
+    this.getGames();
+  }
 
-    @action
-    getGames() {
-      this.api.getAllGames()
-        .then(result => result.data)
-        .then((games) => {
-          this.leaderboard = games;
-        })
-        .catch(console.err);
-    }
+  @action
+  getGames() {
+    this.api.getLeaderBoard()
+      .then(result => result.data)
+      .then((games) => {
+        console.log(games);
+        this.leaderboard = games;
+      })
+      .catch(console.err);
+  }
 }
 
 

@@ -11,7 +11,7 @@
   justify-content: center;
 }
 
-.player-selection{
+.leaderboard-container, .player-selection{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,4 +39,12 @@
 
 .form-control-select-move{
   width: 10em
+}
+.leaderboard-card{
+  max-width: 30em;
+}
+
+.MuiList-root a{
+  text-decoration: none;
+  color: rgba(0,0,0,0.87)
 }

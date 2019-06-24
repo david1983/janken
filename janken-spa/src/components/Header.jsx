@@ -7,14 +7,15 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {
-  SupervisedUserCircle, Gamepad, TableChart, Info,
+  SupervisedUserCircle, Gamepad, TableChart,
 } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
+import { observer, inject } from 'mobx-react';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 /**
  * Component that renders the application bar and the menu drawer
  */
-export default function ButtonAppBar() {
+function ButtonAppBar({ LeaderBoard }) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -56,34 +57,37 @@ export default function ButtonAppBar() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <Link to="/">
+        <NavLink to="/">
           <ListItem button>
             <ListItemIcon><SupervisedUserCircle /></ListItemIcon>
             <ListItemText primary="Player selection" />
           </ListItem>
-        </Link>
+        </NavLink>
 
-        <Link to="/game">
+        <NavLink to="/game">
           <ListItem button>
             <ListItemIcon><Gamepad /></ListItemIcon>
             <ListItemText primary="Start again" />
           </ListItem>
-        </Link>
-        <Link to="/leaderboard">
-          <ListItem button>
+        </NavLink>
+        <NavLink
+          to="/leaderboard"
+          onClick={() => {
+            LeaderBoard.getGames();
+          }}
+        >
+
+          <ListItem
+            button
+          >
             <ListItemIcon><TableChart /></ListItemIcon>
             <ListItemText primary="Leaderboard" />
           </ListItem>
-        </Link>
+
+        </NavLink>
 
       </List>
-      <Divider />
-      <List>
-        <ListItem button>
-          <ListItemIcon><Info /></ListItemIcon>
-          <ListItemText primary="About the game" />
-        </ListItem>
-      </List>
+
     </div>
   );
 
@@ -116,3 +120,13 @@ export default function ButtonAppBar() {
     </div>
   );
 }
+
+ButtonAppBar.defaultProps = {
+  LeaderBoard: {},
+};
+
+ButtonAppBar.propTypes = {
+  LeaderBoard: PropTypes.object,
+};
+
+export default inject('LeaderBoard')(observer(ButtonAppBar));

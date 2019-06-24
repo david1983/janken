@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'mobx-react';
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Route } from 'react-router';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { green, teal } from '@material-ui/core/colors';
@@ -39,7 +39,7 @@ function App() {
               <Route exact path="/" component={PlayerSelection} />
               <Route exact path="/game" component={Game} />
               <Route exact path="/leaderboard" component={LeaderBoard} />
-              <Redirect to="/" />
+
             </div>
           </Router>
         </Provider>

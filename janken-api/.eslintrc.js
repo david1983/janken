@@ -16,6 +16,7 @@ module.exports = {
     ecmaVersion: 2018,
   },
   rules: {
+    "no-param-reassign": 0,
     "comma-dangle": 0,
     "no-console": 0,
     "no-undef": 0

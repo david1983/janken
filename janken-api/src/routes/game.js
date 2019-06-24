@@ -55,6 +55,23 @@ function getAllGames(req, res, Game) {
   // TODO: this is a bit general add more checks for other errors
 }
 
+function getLeaderBoard(req, res, Game) {
+  Game
+    .find({})
+    .then((result) => {
+      const leaderboard = result.reduce((a, i) => {
+        console.log(i.winner);
+        if (i.winner === '' || !i.winner) return a;
+        if (!a[i.winner]) { a[i.winner] = 1; } else { a[i.winner] += 1; }
+        return a;
+      }, {});
+      const leaderboardArray = Object.keys(leaderboard)
+        .map(name => [name, leaderboard[name]]).sort((a, b) => (b[1] - a[1]));
+      res.json(leaderboardArray);
+    })
+    .catch(error => res.status(500).json({ error }));
+}
+
 
 /**
  * defining the mongoose model for storing the games
@@ -69,6 +86,7 @@ const Game = mongoose.model('game', {
 // assigning the functions to the routes
 router.post('/', (req, res) => createGame(req, res, Game));
 router.get('/all', (req, res) => getAllGames(req, res, Game));
+router.get('/leaderboard', (req, res) => getLeaderBoard(req, res, Game));
 router.get('/:id', (req, res) => getGame(req, res, Game));
 
 // exporting the functions in order to use them in unit tests

@@ -24,6 +24,10 @@ class Api {
   getAllGames() {
     return axios.get(`${this.baseUrl}/game/all`);
   }
+
+  getLeaderBoard() {
+    return axios.get(`${this.baseUrl}/game/leaderboard`);
+  }
 }
 
 export default Api;

@@ -4,6 +4,7 @@ const config = {
     port: 3005,
   },
   db: {
+    host: 'mongodb',
     port: 27017,
     dbname: 'janken-dev',
   },
