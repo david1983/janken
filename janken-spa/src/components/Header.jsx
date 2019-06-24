@@ -14,6 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import {
   SupervisedUserCircle, Gamepad, TableChart, Info,
 } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,20 +56,26 @@ export default function ButtonAppBar() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <ListItem button>
-          <ListItemIcon><SupervisedUserCircle /></ListItemIcon>
-          <ListItemText primary="Player selection" />
-        </ListItem>
+        <Link to="/">
+          <ListItem button>
+            <ListItemIcon><SupervisedUserCircle /></ListItemIcon>
+            <ListItemText primary="Player selection" />
+          </ListItem>
+        </Link>
 
-        <ListItem button>
-          <ListItemIcon><Gamepad /></ListItemIcon>
-          <ListItemText primary="Start again" />
-        </ListItem>
+        <Link to="/game">
+          <ListItem button>
+            <ListItemIcon><Gamepad /></ListItemIcon>
+            <ListItemText primary="Start again" />
+          </ListItem>
+        </Link>
+        <Link to="/leaderboard">
+          <ListItem button>
+            <ListItemIcon><TableChart /></ListItemIcon>
+            <ListItemText primary="Leaderboard" />
+          </ListItem>
+        </Link>
 
-        <ListItem button>
-          <ListItemIcon><TableChart /></ListItemIcon>
-          <ListItemText primary="Leaderboard" />
-        </ListItem>
       </List>
       <Divider />
       <List>
